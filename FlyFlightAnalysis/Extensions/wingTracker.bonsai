@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WorkflowBuilder Version="2.6.3"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
+                 xmlns="https://bonsai-rx.org/2018/workflow">
+  <Workflow>
+    <Nodes>
+      <Expression xsi:type="WorkflowInput">
+        <Name>Source1</Name>
+      </Expression>
+      <Expression xsi:type="ExternalizedMapping">
+        <Property Name="Regions" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:CropPolygon">
+          <cv:Regions>
+            <cv:ArrayOfPoint>
+              <cv:Point>
+                <cv:X>169</cv:X>
+                <cv:Y>264</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>196</cv:X>
+                <cv:Y>209</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>236</cv:X>
+                <cv:Y>159</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>285</cv:X>
+                <cv:Y>125</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>344</cv:X>
+                <cv:Y>108</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>401</cv:X>
+                <cv:Y>105</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>443</cv:X>
+                <cv:Y>119</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>481</cv:X>
+                <cv:Y>152</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>513</cv:X>
+                <cv:Y>203</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>489</cv:X>
+                <cv:Y>222</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>448</cv:X>
+                <cv:Y>173</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>408</cv:X>
+                <cv:Y>149</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>326</cv:X>
+                <cv:Y>161</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>275</cv:X>
+                <cv:Y>185</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>231</cv:X>
+                <cv:Y>236</cv:Y>
+              </cv:Point>
+              <cv:Point>
+                <cv:X>209</cv:X>
+                <cv:Y>286</cv:Y>
+              </cv:Point>
+            </cv:ArrayOfPoint>
+          </cv:Regions>
+          <cv:MaskType>ToZero</cv:MaskType>
+          <cv:FillValue>
+            <cv:Val0>0</cv:Val0>
+            <cv:Val1>0</cv:Val1>
+            <cv:Val2>0</cv:Val2>
+            <cv:Val3>0</cv:Val3>
+          </cv:FillValue>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:Grayscale" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:Threshold">
+          <cv:ThresholdValue>134</cv:ThresholdValue>
+          <cv:MaxValue>255</cv:MaxValue>
+          <cv:ThresholdType>Binary</cv:ThresholdType>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:FindContours">
+          <cv:Mode>External</cv:Mode>
+          <cv:Method>ChainApproxNone</cv:Method>
+          <cv:Offset>
+            <cv:X>0</cv:X>
+            <cv:Y>0</cv:Y>
+          </cv:Offset>
+          <cv:MinArea>500</cv:MinArea>
+          <cv:MaxArea xsi:nil="true" />
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:BinaryRegionAnalysis" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:LargestBinaryRegion" />
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:BinaryRegionExtremes">
+          <cv:Method>Horizontal</cv:Method>
+        </Combinator>
+      </Expression>
+      <Expression xsi:type="Combinator">
+        <Combinator xsi:type="cv:ConvertColor">
+          <cv:Conversion>Gray2Bgr</cv:Conversion>
+        </Combinator>
+      </Expression>
+    </Nodes>
+    <Edges>
+      <Edge From="0" To="2" Label="Source1" />
+      <Edge From="1" To="2" Label="Source2" />
+      <Edge From="2" To="3" Label="Source1" />
+      <Edge From="3" To="4" Label="Source1" />
+      <Edge From="3" To="9" Label="Source1" />
+      <Edge From="4" To="5" Label="Source1" />
+      <Edge From="5" To="6" Label="Source1" />
+      <Edge From="6" To="7" Label="Source1" />
+      <Edge From="7" To="8" Label="Source1" />
+    </Edges>
+  </Workflow>
+</WorkflowBuilder>
