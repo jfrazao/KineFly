@@ -1,1 +1,1 @@
-KineFly Library for thetered flight
+KineFly Library for VR thetered flight
